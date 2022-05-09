@@ -1,0 +1,68 @@
+{% extends "profile_layout.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <div class="row" id="closet_div">
+            <h1 class="h2 mb-3 font-weight-normal" id="titleheader">Get Recommendations that match your wardrobe! </h1>
+            <div class="row" id="upload_div">
+                <h4 class="h4 mb-3 font-weight-normal">Upload an image from your device</h4>
+                <i class="fa-solid fa-upload"></i>
+                <h5 class="h5 mb-3 font-weight-normal">Max file size: 5mb, accepted: .jpg | .png | .jpeg</h5>
+                <!-- <button class="btn btn-outline-primary">Choose Image</button> -->
+                <form class="upload_form">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" accept="image/jpg" id="inputFile" onchange="image_preview()">
+                            <label class="custom-file-label" for="inputFile">Select photo</label>
+                        </div>
+                        <!-- <input id='custom_labels' type="text" class="form-control" placeholder="Enter custom labels here"> -->
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onclick="uploadPhoto()">Get Recommendations</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="spacer"></div>
+            <div class="preview_div">
+                <img id="preview_image">
+            </div>
+            <div class="spacer2"></div>
+            <div class="recommendations_div"></div>
+            <!-- <button class="btn btn-outline-secondary" id="upload_btn">Upload Image</button> -->
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    function image_preview() {
+        inputFile = document.getElementById('inputFile');
+        preview_image = document.getElementById("preview_image");
+        const [file] = inputFile.files
+        console.log(inputFile.files);
+        if (file) {
+            console.log(URL.createObjectURL(file));
+            preview_image.src = URL.createObjectURL(file)
+        }
+    }
+
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+                if ((encoded.length % 4) > 0) {
+                    encoded += '='.repeat(4 - (encoded.length % 4));
+                }
+                resolve(encoded);
+            };
+            reader.onerror = error => reject(error);
+        });
+    }
+
+</script>
+
+{% endblock %}

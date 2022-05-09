@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <div class="row" id="reg_div">
+            <h1 class="h3 mb-3 font-weight-normal" id="titleheader">Login to your Account</h1>
+            <input type="text" class="form-control" id="inputUsername"  placeholder="Email address" name="username" required autofocus>
+            <input type="password" class="form-control" id="inputPassword"  placeholder="Password" name="password" required> 
+            <div id="error_div"></div>
+            <button class="btn btn-lg btn-primary btn-block" id="login_btn" type="button" onclick="signInButton()">Login</button>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function signInButton() {
+
+        $("#error_div").html("")
+        var authenticationData = {
+            Username: document.getElementById("inputUsername").value,
+            Password: document.getElementById("inputPassword").value,
+        };
+
+        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+        var poolData = {
+            UserPoolId: _config.cognito.userPoolId, // Your user pool id here
+            ClientId: _config.cognito.clientId, // Your client id here
+        };
+
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+        var userData = {
+            Username: document.getElementById("inputUsername").value,
+            Pool: userPool,
+        };
+
+        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+        cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess: function (result) {
+                var accessToken = result.getAccessToken().getJwtToken();
+                console.log(accessToken);
+                window.location.href = "/profile"
+            },
+
+            onFailure: function (err) {
+                console.log(err.message || JSON.stringify(err));
+                $("#error_div").html(err.message || JSON.stringify(err))
+            },
+        });
+    }
+</script>
+
+{% endblock %}

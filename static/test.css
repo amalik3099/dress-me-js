@@ -1,0 +1,228 @@
+#hello_div{
+    padding-top:  10px;
+    padding-bottom:  10px;
+    color: blue;
+}
+#welcome{
+    font-size: medium;
+}
+.navbar{
+    margin-bottom: 20px;
+}
+.navbar-brand{
+    font-size: 25px;
+    color: whitesmoke !important;
+}
+.card{
+    border: 1px solid blue;
+}
+.client {
+    width: 400px;
+    border: 1px solid lightgray;
+}
+.reams {
+    border: 1px solid lightgray;
+}
+::placeholder {
+    color: lightgray
+}
+#break {
+    color: rgb(57, 64, 71);
+    padding-bottom: 10px;
+}
+.btn {
+    margin-bottom: 10px;
+    height: 35px;
+    vertical-align: middle;
+    line-height: 17px;
+}
+#error {
+    font-size: 14px;
+    font-weight: 300;
+    color: red;
+}
+.ft_brands {
+    display: inline-block
+}
+#brand_img {
+    width: 150px;
+    height: 150px;
+    margin-right: 50px;
+}
+#summary {
+    display: inline-block;
+}
+#watch_pic {
+    display: inline-block;
+}
+#watch_info{
+    display: inline-block;
+}
+#watch_img {
+    width: 300px;
+    height: 300px;
+}
+#brand_name {
+    font-weight: 600;
+    font-size: 22px;
+}
+#tag_line{
+    font-size: 25px;
+    margin-top: 15px;
+}
+#welcome{
+    font-size: 25px;
+}
+#divider{
+    width: 100%;
+    height: 20px;
+    color: black;
+    margin-bottom: 10px;
+    border-width: 3px;
+}
+#info_btn{
+    margin-top: 20px;
+}
+#name {
+    font-weight: 600;
+    font-size: 20px;
+}
+#display_img{
+    width: 400px;
+    height: 400px;
+}
+#data {
+    margin-top: 20px;
+}
+#empty_div{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: -13px;
+}
+#vid_div{
+    width: inherit;
+    margin-bottom: 20px;
+}
+#promo_div{
+    margin-bottom: 30px;
+}
+#promo{
+    width: 100%;
+    height: 500px;
+    padding: 0;
+    margin: 0;
+}
+#sub_promo{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    width: 100%;
+    padding: 0;
+}
+#chart_div{
+    margin-top: 20px;
+}
+#num_results{
+    font-size: 20px;
+    font-weight: 400;
+    color: lightslategray;
+}
+mark{
+    background: rgb(252, 224, 146);
+    color: black;
+    border-radius: 7px;
+}
+#add_btn{
+    font-size: 18px;
+    color: whitesmoke;
+}
+#section_title{
+    font-size: 20px;
+    font-weight: 500;
+}
+#input_div{
+    margin-bottom: 20px;
+}
+#inline_div{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+label {
+    display: inline-block;
+    margin-top: 10px;
+    /* color: rgb(3, 3, 189); */
+}
+input, textarea {
+    border-bottom: 2px solid rgb(0, 0, 143);
+}  
+label span {
+font-size: 1rem;
+}
+
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+input.error, textarea.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+#updates_div{
+    display: none;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    border: 1px solid blue;
+}
+#link_text{
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+#discard_btn{
+    margin-left: 20px;
+}
+#year_btn{
+    padding: 0;
+    margin: 0;
+}
+#edit_btn{
+    padding: 0;
+    margin: 0;
+}
+.modal{
+    display: block;
+}
+body{
+    background-color: blue;
+    font-size: 50px;
+}
+#content_body{
+    background-color: white;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 10px;
+}
+#year_div{
+    color: grey;
+}
+#promo_content{
+    color: slategrey;
+    font-size: 18px;
+}
+#watch_summary{
+    color: rgb(75, 78, 80);
+}
+#support_content{
+    color: rgb(165, 165, 165);
+}
+#info_summary{
+    margin-top: -22px;
+}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <div class="row" id="intro">
+            <div id="tag">Welcome to Dress Me!</div>
+            <div id="sub_tag">Get Started by logging in or creating an account</div>
+        </div>
+        <div class="row" id="homepage_img">
+            <img id="display" alt="display image" src="https://blog.wideeyes.ai/wp-content/uploads/2019/04/Outfit_Recommendation_How-to-wear.png">
+        </div>
+        <div class="row" id="card">
+            <div class="control">
+                <button class="btn btn-primary" id="create_account">Create Account</button>
+            </div>
+            <div class="control">
+                <button class="btn btn-secondary" id="login">Login Account</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#create_account").click(function () {
+            window.location.href = "/registration"
+        })
+        $("#login").click(function () {
+            window.location.href = "/login"
+        })
+    })
+</script>
+
+{% endblock %}

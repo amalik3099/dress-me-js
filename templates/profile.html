@@ -1,0 +1,32 @@
+{% extends "profile_layout.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container">
+        <div class="row" id="closet_div">
+            <h1 class="h2 mb-3 font-weight-normal" id="titleheader">Welcome to Dress me! </h1>
+            <div class="row" id="closet_title">
+                <h3 class="h3 font-weight-normal">Your Closet</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6" id="add_btn_div">
+                    <button class="btn btn-outline-primary" id="add_btn" onclick="window.location.href='/upload'">Add Clothes</button>
+                </div>
+                <div class="col-md-6" id="reco_btn_div">
+                    <button class="btn btn-outline-primary" id="reco_btn" onclick="window.location.href='/recommendations'">View Recommendations</button>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="wardrobe"></div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    // $(document).ready(function () {
+        
+    // })
+</script>
+
+{% endblock %}
