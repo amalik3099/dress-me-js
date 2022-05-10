@@ -75,8 +75,12 @@
             //change elements of page
             if (cognitoUser.getUsername() !== "") {
                 document.getElementById("titleheader").innerHTML = "Check your email for a verification link";
+                console.log(cognitoUser)
+                window.setTimeout(function(){
+                // Move to a new location or you can do something else
+                window.location.href = "/login";
+                }, 2000);
             }
-
         });
     }
 

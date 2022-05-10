@@ -23,7 +23,7 @@
                             <option value="pants">
                             <option value="outerwear">
                             <option value="shoe">
-                            <option value="shirt">
+                            <!-- <option value="shirt"> -->
                             <option value="top">
                             <option value="jeans">
                             <option value="hat">
@@ -95,6 +95,11 @@
                 'Content-Type': file.type,
                 'Authorization': localStorage.getItem("id_token"),
                 'x-amz-meta-customLabels': custom_labels.value
+            }
+        }).then(function (response) {
+            console.log("RESP", response)
+            if (response.status == "200") {
+                window.location.href="/profile"
             }
         })
 

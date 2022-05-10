@@ -30,6 +30,7 @@
             </div>
             <div class="spacer2"></div>
             <!-- <button class="btn btn-outline-secondary" id="get_reco_btn" onclick="test_fn()">Get Recommendations</button> -->
+            <div class="loading_div" style="visibility: hidden;">Fetching your recommendations ...</div>
             <div class="recommendations_div"></div>
             <!-- <button class="btn btn-outline-secondary" id="upload_btn">Upload Image</button> -->
         </div>
@@ -89,17 +90,42 @@
             }
         }).then(function (response) {
             console.log("RESP", response)
+            poll_search()
+        })
+    }
+
+    function poll_search() {
+        var reader = new FileReader();
+        var file = document.getElementById('inputFile').files[0];
+        
+        axios.post("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/search", {
+            "sub": String(localStorage.getItem("sub")),
+            "fname": String(file.name.split(".")[0])
+            // "sub": "b1725a47-bef9-4489-958d-d762f4bed197",
+            // "fname": "zendaya"
+        }).then(function (response) {
+            console.log("RECO RESP", response)
             if (response.status == "200") {
-                res_len = resonse.data.length
-                res_data = response.data
-                for (let i = 0; i < res_len; i++) {
-                    console.log(res_data[i]);
-                    var img = document.createElement("img");
-                    img.src = res_data[i];
-                    img.id = "reco_pic";
-                    $(".recommendations_div").append(img);
+                if (response.data.completed == false) {
+                    $(".loading_div").css("visibility: visible")
+                    setTimeout(poll_search, 2000);
+                }
+                else {
+                    $(".loading_div").css("visibility: hidden")
+                    res_len = response.data.images.length
+                    res_data = response.data.images
+                    for (let i = 0; i < res_len; i++) {
+                        console.log(res_data[i].key);
+                        var img = document.createElement("img");
+                        img.src = res_data[i].key;
+                        img.id = "reco_pic";
+                        $(".recommendations_div").append(img);
+                    }
                 }
             }
+        })
+        .catch(function(error) {
+            console.log(error)
         })
     }
 
