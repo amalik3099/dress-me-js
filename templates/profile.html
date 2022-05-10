@@ -18,15 +18,46 @@
                 </div>
             </div>
             <div class="spacer"></div>
+            <button class="btn btn-outline-secondary" id="get_closet_btn" onclick="viewCloset()">View Closet</button>
             <div class="wardrobe"></div>
         </div>
     </div>
 </body>
 
 <script type="text/javascript">
-    // $(document).ready(function () {
-        
-    // })
+
+function viewCloset() {
+        // axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"), {
+        //     headers: {
+        //         // 'Access-Control-Allow-Origin': '*',
+        //         // 'Content-Type': file.type,
+        //         // 'Authorization': localStorage.getItem("id_token")
+        //     }
+        // }).then(function (response) {
+        //     console.log("RESP")
+        //     console.log(response)
+        //     console.log("PIZZA")
+        // })
+        //     .catch(err => console.error(err));
+        axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"))
+        .then(function (response) {
+            console.log("STATUS", response.status)
+            if (response.status == "200") {
+                res_len = resonse.data.length
+                res_data = response.data
+                for (let i = 0; i < res_len; i++) {
+                    console.log(res_data[i]);
+                    var img = document.createElement("img");
+                    img.src = res_data[i];
+                    img.id = "reco_pic";
+                    $(".wardrobe").append(img);
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error)
+        })
+    }
 </script>
 
 {% endblock %}

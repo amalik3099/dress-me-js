@@ -29,7 +29,7 @@
                 <img id="preview_image">
             </div>
             <div class="spacer2"></div>
-            <button class="btn btn-outline-secondary" id="get_reco_btn" onclick="getRecommendations()">Get Recommendations</button>
+            <!-- <button class="btn btn-outline-secondary" id="get_reco_btn" onclick="test_fn()">Get Recommendations</button> -->
             <div class="recommendations_div"></div>
             <!-- <button class="btn btn-outline-secondary" id="upload_btn">Upload Image</button> -->
         </div>
@@ -82,27 +82,70 @@
         console.log(file)
 
         axios.put("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/upload/" + localStorage.getItem("sub") + "/search/" + file.name.split(".")[0] + "/" + file.name, file, {
-            headers : {
+            headers: {
                 // 'Access-Control-Allow-Origin': '*',
                 'Content-Type': file.type,
                 'Authorization': localStorage.getItem("id_token")
             }
         }).then(function (response) {
             console.log("RESP", response)
+            if (response.status == "200") {
+                res_len = resonse.data.length
+                res_data = response.data
+                for (let i = 0; i < res_len; i++) {
+                    console.log(res_data[i]);
+                    var img = document.createElement("img");
+                    img.src = res_data[i];
+                    img.id = "reco_pic";
+                    $(".recommendations_div").append(img);
+                }
+            }
         })
     }
 
-    function getRecommendations() {
-        axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/upload/" + localStorage.getItem("sub") + "/search/" + file.name.split(".")[0] + "/" + file.name, file, {
-            headers : {
-                // 'Access-Control-Allow-Origin': '*',
-                'Content-Type': file.type,
-                'Authorization': localStorage.getItem("id_token")
-            }
-        }).then(function (response) {
-            console.log("RESP", response)
-        })
-    }
+    // function getRecommendations() {
+    //     // axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"), {
+    //     //     headers: {
+    //     //         // 'Access-Control-Allow-Origin': '*',
+    //     //         // 'Content-Type': file.type,
+    //     //         // 'Authorization': localStorage.getItem("id_token")
+    //     //     }
+    //     // }).then(function (response) {
+    //     //     console.log("RESP")
+    //     //     console.log(response)
+    //     //     console.log("PIZZA")
+    //     // })
+    //     //     .catch(err => console.error(err));
+    //     axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"))
+    //     .then(function (response) {
+    //         console.log("STATUS", response.status)
+    //         if (response.status == "200") {
+    //             res_len = resonse.data.length
+    //             res_data = response.data
+    //             for (let i = 0; i < res_len; i++) {
+    //                 console.log(res_data[i]);
+    //                 var img = document.createElement("img");
+    //                 img.src = res_data[i];
+    //                 img.id = "reco_pic";
+    //                 $(".recommendations_div").append(img);
+    //             }
+    //         }
+    //     })
+    //     .catch(function(error) {
+    //         console.log(error)
+    //     })
+    // }
+
+    // function test_fn() {
+    //     res_data = ["https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/1-waves-unique-colorful-navinjoshi-signature-art-original-fine-art-ideas-download-jpg-file-digitalart-navin-joshi.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=U5oncYB2GVbzxY8B%2BRMrqjjpfCc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191068", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/71iXKWX2xdL._AC_SR1840%2C1472_.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=SvCcMjkyIDUAHSSfVG0tSfzfoJ8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191068", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/black_jacket.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=X1rGN2jDiZInZDIk2hf%2FjWlQHHs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191068", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/blank_tshirt.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=t7B%2BHlJn%2BDtfX3TvIjb0jluZyKI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191068", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/brown_jacket.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=RdxHoqSCPHX2iOrdbEy8Xqij6T8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/cn20106826-613f76cd0d357.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=WSU20%2BLukPNXlCaqKsSTCjFC7fY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/depositphotos_26263587-stock-photo-man-in-blank-t-shirt.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=n0OB7TlbShaDRcXz8RCWKOHyQIQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/plain_img.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=XjOfAvmqMn2ySIQVAVD%2FZGed6tA%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/shorts.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=5nsiyhV%2B1phGcshCsRZY83xc6wA%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/women_black_shirt.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=35lSTcAuSHdIvxrF549rFqKogJQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069", "https://gucci-gang-closet.s3.amazonaws.com/b1725a47-bef9-4489-958d-d762f4bed197/closet/1/yellow_jacket.jpg?AWSAccessKeyId=ASIA5PQ3UQO5DHHZQK4N&Signature=pN9UswGfFvN%2B7KEyrMttHCikYx4%3D&x-amz-security-token=IQoJb3JpZ2luX2VjED0aCXVzLWVhc3QtMSJIMEYCIQCtjmCBtl4pP3KqtVAuXFgv4NJwnetyL0boD4CLgCK9PwIhALFTAeEFAJnhkP8mFqql4MgbsnJo0f6eo8CNs1ySY5dAKpoCCBYQABoMOTI2Njk3MTYxNjU4Igz2Y%2BDDhikxsieVtLMq9wGf%2FMsjiN2H%2BpF%2B7%2BbMwl4QI7doXPfSe0b3JqydB1uXx%2BxYvZ%2B4agvXl9FLXoRonRIArOdkKYgpgMdu9V3HyC0fIlhVY07wUApEgp3%2FnksNxjwuhZLI4xXJgfh6ls3dTj87tVmCFkvmhG8hmkChyk7yzI2hrZenFvvi23rBoWMl2O3tpFFF4ZTmIkM1atBTiy98ixCT02kehXzgxb8gOeZC4WfaBWtev3iJ%2F5hKW44ko9zeGe7O6ArrHvdjso4mJ4uhH28cCHYx5IozmndHmnnl4WMfAjlZKdmhRgV%2FDuwzS%2FPVKO6fqQhlTSm4n4ttuh%2BM0RMefxUoMMvC6ZMGOpkBhineUIoB%2F6BrT761xGIwW99O0RzvHweGok0iB791WQpCxs%2FQl%2FgsNo%2F0j1AfS5oT%2FGaiO%2FpOYeYFVF5D7loz6tr6JlNYQlJYnY6lZiYhC8PYUI%2FFf6QYpWsBRuXmSMFL8UBH614Af77w92EJqTp4z82TUYzCwqv85UK4maR%2F4Ev6Mev7LQXlZbwGV8XY54Z5i6AbS8UoqFSD&Expires=1652191069"]
+    //     for (let i = 0; i < res_data.length; i++) {
+    //         console.log(res_data[i]);
+    //         var img = document.createElement("img");
+    //         img.src = res_data[i];
+    //         img.id = "reco_pic";
+    //         $(".recommendations_div").append(img);
+    //     }
+    // }
 
 </script>
 

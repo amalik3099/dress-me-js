@@ -157,6 +157,20 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+#get_closet_btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 #recommendations_div {
+    width: 100%;
     margin-bottom: 30px;
+}
+.wardrobe {
+    width: 100%;
+    margin-bottom: 30px;
+}
+#reco_pic {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
 }
