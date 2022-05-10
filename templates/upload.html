@@ -17,7 +17,17 @@
                             <input type="file" class="custom-file-input" accept="image/jpg" id="inputFile" onchange="image_preview()">
                             <label class="custom-file-label" for="inputFile">Select photo</label>
                         </div>
-                        <input id='custom_labels' type="text" class="form-control" placeholder="Enter custom labels here">
+                        <!-- <input id='custom_labels' type="text" class="form-control" placeholder="Enter custom labels here"> -->
+                        <input list="custom_label" id="custom_labels" name="mylabels" placeholder="Choose Label"/>
+                        <datalist id="custom_label">
+                            <option value="pants">
+                            <option value="outerwear">
+                            <option value="shoe">
+                            <option value="shirt">
+                            <option value="top">
+                            <option value="jeans">
+                            <option value="hat">
+                        </datalist>
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button" onclick="uploadPhoto()">Upload</button>
                         </div>
@@ -59,6 +69,76 @@
             };
             reader.onerror = error => reject(error);
         });
+    }
+
+    function uploadPhoto() {
+        // console.log(axios)
+        var filePath = (document.getElementById('inputFile').value).split("\\");
+        var fileName = filePath[filePath.length - 1];
+        console.log(filePath);
+
+        if (!document.getElementById('custom_labels').value == "") {
+            var customLabels = document.getElementById('custom_labels');
+        }
+        console.log(fileName);
+        console.log(custom_labels.value);
+
+        var reader = new FileReader();
+        var file = document.getElementById('inputFile').files[0];
+        console.log(file.name)
+        console.log(file.type)
+        console.log(file)
+
+        axios.put("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/upload/" + localStorage.getItem("sub") + "/closet/1/" + file.name, file, {
+            headers : {
+                // 'Access-Control-Allow-Origin': '*',
+                'Content-Type': file.type,
+                'Authorization': localStorage.getItem("id_token"),
+                'x-amz-meta-customLabels': custom_labels.value
+            }
+        })
+
+        // console.log('File : ', file);
+        // document.getElementById('inputFile').value = "";
+        // var apigClient = apigClientFactory.newClient({
+        //     apiKey: 'wxI1Wedpmq6GKPc8xefAa89mXbEdMIY7ajr0iiFk'
+        // });
+
+        // if ((filePath == "") || (!['png', 'jpg', 'jpeg'].includes(fileName.split(".")[1]))) {
+        //     alert("Please upload a valid .png/.jpg/.jpeg file!");
+        // } else {
+
+        //     var params = {
+        //         "filename": fileName,
+        //         "bucket": "octavius-photos",
+        //         "Content-Type": file.type,
+        //         "customlabels": custom_labels.value,
+        //         // "sub": localStorage.getItem("sub")
+        //     };
+
+        //     var additionalParams = {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //             'Content-Type': file.type,
+        //             'Authorization': localStorage.getItem("access_token")
+        //         }
+        //     };
+
+        //     reader.onload = function (event) {
+        //         body = btoa(event.target.result);
+        //         console.log('Reader body : ', body);
+        //         return apigClient.photosBucketFilenamePut(params, body, additionalParams)
+        //             .then(function (result) {
+        //                 console.log(result);
+        //                 $("#upload_status").show();
+        //             })
+        //             .catch(function (error) {
+        //                 console.log(error);
+        //                 $("#upload_status").hide();
+        //             })
+        //     }
+        //     reader.readAsBinaryString(file);
+        // }
     }
 
 </script>

@@ -125,7 +125,7 @@ body {
     text-align: right;
 }
 #add_btn {
-    width: 200px;
+    width: 250px;
 }
 #reco_btn_div {
     margin-top: 30px;
@@ -133,7 +133,7 @@ body {
     text-align: left;
 }
 #reco_btn {
-    width: 200px;
+    width: 250px;
 }
 #upload_div {
     margin-top: 20px;
@@ -152,4 +152,11 @@ body {
 }
 .upload_form {
     margin-top: 20px;
+}
+#get_reco_btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#recommendations_div {
+    margin-bottom: 30px;
 }

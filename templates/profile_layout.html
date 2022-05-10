@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -60,7 +63,16 @@
                         alert(err);
                         return;
                     }
+                    console.log("SESSION")
+                    console.log(session.getAccessToken().getJwtToken())
+                    localStorage.setItem("access_token", session.getAccessToken().getJwtToken())
+                    console.log("ID TOKEN")
+                    console.log(session.getIdToken().getJwtToken())
+                    localStorage.setItem("id_token", session.getIdToken().getJwtToken())
+                    // localStorage.setItem("jwt_token", )
                     console.log('session validity: ' + session.isValid());
+                    console.log("SESSION")
+                    
                     //Set the profile info
                     cognitoUser.getUserAttributes(function (err, result) {
                         if (err) {
@@ -68,6 +80,8 @@
                             return;
                         }
                         console.log(result);
+                        console.log(result[0]['Value'])
+                        localStorage.setItem("sub", result[0]['Value'])
                         document.getElementById("email_value").innerHTML = result[2].getValue();
                     });
 

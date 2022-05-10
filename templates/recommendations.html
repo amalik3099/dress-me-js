@@ -19,7 +19,7 @@
                         </div>
                         <!-- <input id='custom_labels' type="text" class="form-control" placeholder="Enter custom labels here"> -->
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" onclick="uploadPhoto()">Get Recommendations</button>
+                            <button class="btn btn-primary" type="button" onclick="uploadPhoto()">Upload Image</button>
                         </div>
                     </div>
                 </form>
@@ -29,6 +29,7 @@
                 <img id="preview_image">
             </div>
             <div class="spacer2"></div>
+            <button class="btn btn-outline-secondary" id="get_reco_btn" onclick="getRecommendations()">Get Recommendations</button>
             <div class="recommendations_div"></div>
             <!-- <button class="btn btn-outline-secondary" id="upload_btn">Upload Image</button> -->
         </div>
@@ -61,6 +62,46 @@
             };
             reader.onerror = error => reject(error);
         });
+    }
+
+    function uploadPhoto() {
+        var filePath = (document.getElementById('inputFile').value).split("\\");
+        var fileName = filePath[filePath.length - 1];
+        console.log(filePath);
+
+        // if (!document.getElementById('custom_labels').innerText == "") {
+        //     var customLabels = document.getElementById('custom_labels');
+        // }
+        console.log(fileName);
+        // console.log(custom_labels.value);
+
+        var reader = new FileReader();
+        var file = document.getElementById('inputFile').files[0];
+        console.log(file.name)
+        console.log(file.type)
+        console.log(file)
+
+        axios.put("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/upload/" + localStorage.getItem("sub") + "/search/" + file.name.split(".")[0] + "/" + file.name, file, {
+            headers : {
+                // 'Access-Control-Allow-Origin': '*',
+                'Content-Type': file.type,
+                'Authorization': localStorage.getItem("id_token")
+            }
+        }).then(function (response) {
+            console.log("RESP", response)
+        })
+    }
+
+    function getRecommendations() {
+        axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/upload/" + localStorage.getItem("sub") + "/search/" + file.name.split(".")[0] + "/" + file.name, file, {
+            headers : {
+                // 'Access-Control-Allow-Origin': '*',
+                'Content-Type': file.type,
+                'Authorization': localStorage.getItem("id_token")
+            }
+        }).then(function (response) {
+            console.log("RESP", response)
+        })
     }
 
 </script>
