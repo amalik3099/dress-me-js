@@ -25,10 +25,16 @@
                 </form>
             </div>
             <div class="spacer"></div>
+            <div class="exp_text">
+                Get Started by choosing an outfit of your favorite fashion icon that you want to match. 
+            </div>
             <div class="preview_div">
                 <img id="preview_image">
             </div>
             <div class="spacer2"></div>
+            <div class="exp_text">
+                Our algorithms work to find the best matched items from your closet to recreate the outfit of your favorite celebrity!
+            </div>
             <!-- <button class="btn btn-outline-secondary" id="get_reco_btn" onclick="test_fn()">Get Recommendations</button> -->
             <div class="loading_div" style="visibility: hidden;">Fetching your recommendations ...</div>
             <div class="recommendations_div"></div>
@@ -107,11 +113,11 @@
             console.log("RECO RESP", response)
             if (response.status == "200") {
                 if (response.data.completed == false) {
-                    $(".loading_div").css("visibility: visible")
+                    $(".loading_div").css("visibility", "visible")
                     setTimeout(poll_search, 2000);
                 }
                 else {
-                    $(".loading_div").css("visibility: hidden")
+                    $(".loading_div").css("visibility", "hidden")
                     res_len = response.data.images.length
                     res_data = response.data.images
                     for (let i = 0; i < res_len; i++) {

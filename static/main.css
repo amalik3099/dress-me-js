@@ -28,6 +28,13 @@ body {
 #display {
     width: 100%;
 }
+#display_reg {
+    width: 70%;
+}
+#homepage_img {
+    align-items: center;
+    justify-content: center;
+}
 #card {
     width: 100%;
     text-align: center;
@@ -41,26 +48,40 @@ body {
 }
 #reg_div {
     margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+}
+#log_div {
+    margin-top: 40px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #personalnameRegister {
     margin-top:10px;
     margin-bottom: 10px;
+    width: 70%;
 }
 #emailInputRegister {
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 70%;
 }
 #passwordInputRegister {
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 70%;
 }
 #confirmationpassword {
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 70%;
 }
 #register_btn {
     margin-top: 10px;
     margin-bottom: 10px;
+    width: 70%;
 }
 #inputUsername {
     margin-top: 10px;
@@ -97,6 +118,12 @@ body {
 }
 #titleheader {
     font-weight: 500;
+}
+.exp_text {
+    font-size: 19px;
+    color: rgb(105, 105, 105);
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 .spacer {
     margin-top: 20px;
