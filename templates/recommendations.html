@@ -72,6 +72,7 @@
     }
 
     function uploadPhoto() {
+        $(".recommendations_div").empty()
         var filePath = (document.getElementById('inputFile').value).split("\\");
         var fileName = filePath[filePath.length - 1];
         console.log(filePath);
