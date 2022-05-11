@@ -106,8 +106,11 @@
         var file = document.getElementById('inputFile').files[0];
         
         axios.post("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/search", {
+            headers: {
+                'Authorization': localStorage.getItem("id_token")
+            },
             "sub": String(localStorage.getItem("sub")),
-            "fname": String(file.name.split(".")[0])
+            "fname": String(file.name.split(".")[0]),
             // "sub": "b1725a47-bef9-4489-958d-d762f4bed197",
             // "fname": "zendaya"
         }).then(function (response) {

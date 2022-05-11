@@ -43,7 +43,11 @@
         //     console.log("PIZZA")
         // })
         //     .catch(err => console.error(err));
-        axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"))
+        axios.get("https://1y2qitfifd.execute-api.us-east-1.amazonaws.com/prod/closet?sub=" + localStorage.getItem("sub"), {
+            headers: {
+                'Authorization': localStorage.getItem("id_token")
+            }
+        })
         .then(function (response) {
             console.log("STATUS", response.status)
             if (response.status == "200") {
