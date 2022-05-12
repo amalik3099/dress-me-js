@@ -44,6 +44,7 @@ body {
     margin: 15px;
 }
 #error_div {
+    width: 70%;
     color: rgb(189, 33, 33);
 }
 #reg_div {
